@@ -28,6 +28,7 @@ st.markdown(streamlit_style, unsafe_allow_html=True)
 # Global Variables
 MAX_NEWS_PER_COL = 10
 DATE_VIEW = datetime.today().strftime("%Y-%m-%d") # set default date in the calendar as today.
+NEUTRAL_THRESHOLD = 0.1
 
 if True:
     # Greet
@@ -154,7 +155,7 @@ if True:
         if news_found:
             # Sample value
             sentiment_score = round(score, 3)
-            sentiment_label = "Negative" if sentiment_score <= -0.2 else "Neutral" if sentiment_score < 0.2 else "Positive"
+            sentiment_label = "Negative" if sentiment_score <= -NEUTRAL_THRESHOLD else "Neutral" if sentiment_score < NEUTRAL_THRESHOLD else "Positive"
             
             # create dashboard cols
             leftcol, midcol = st.columns(2)
