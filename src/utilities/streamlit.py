@@ -60,7 +60,7 @@ def create_gauge_chart(current_value):
     fig = go.Figure(
         data=[
             go.Pie(
-                values=[0.5] + [0.2, 0.1, 0.2],
+                values=[0.5] + [0.225, 0.05, 0.225], # 0.2375, 0.025, 0.2375 for .05 threshold
                 rotation=90,
                 hole=0.5,
                 marker_colors=quadrant_colors,
@@ -187,6 +187,7 @@ def display_news(filtered_df, start_idx, end_idx):
         url = row['url']
         category = row['category']
         label = row['label']
+        summary = row['summary']
 
         try:
             source = row['source']
@@ -207,6 +208,9 @@ def display_news(filtered_df, start_idx, end_idx):
 
         # Combine <h6> with <a> tag for the title with underline
         st.write(f"<h6><a href='{url}' style='color:black; font-size:20px; text-decoration:underline;'>{title_safe}</a></h6>", unsafe_allow_html=True)
+
+        # Write summary
+        st.write(f"<p>{summary if summary != 'None' else 'Premium Content'}<p>", unsafe_allow_html=True)
 
         # st.write(f"<h6>{count + 1}. {sentence}</h6>", unsafe_allow_html=True)
         st.write(f'###### Source: {source.capitalize()}. Category: {category.capitalize()}. Date: {date.strftime("%d-%m-%Y")}')
